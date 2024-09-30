@@ -3,7 +3,7 @@
 #include <conio.h>
 #include <string.h>
 
-// Déclaration de la structure Move et des nouvelles fonctions
+// DÃ©claration de la structure Move et des nouvelles fonctions
 typedef struct {
     int r1, c1;
     int r2, c2;
@@ -23,7 +23,7 @@ char board[8][8] = {
     { 'r' , 'n' , ' ' , ' ' , 'q' , ' ' , 'n' , 'r' }
 };
 
-// Déclaration des fonctions
+// DÃ©claration des fonctions
 void display();
 void change( int , int , int , int );
 void rook(int , int , int);
@@ -35,14 +35,14 @@ void save_move(Move, int);
 void load_game(int *);
 void reset_save();
 int is_opponent_piece(char piece, int current_player);
-int check_game_over(); // Ajout de la fonction de vérification de fin de partie
+int check_game_over(); // Ajout de la fonction de vÃ©rification de fin de partie
 void end_game(int winner); // Ajout de la fonction de fin de partie
 
 int main()
 {
     int  x = 0;
     char ch, choice;
-    int current_player = 1; // Détermine le joueur à qui c'est le tour, par défaut joueur 1
+    int current_player = 1; // DÃ©termine le joueur Ã  qui c'est le tour, par dÃ©faut joueur 1
 
     while(1) {
         printf( "\n\tWELCOME TO CHESS GAME" );
@@ -57,9 +57,9 @@ int main()
         scanf(" %c", &choice);
 
         if (choice == '2') {
-            load_game(&current_player);  // Charge l'état de la partie et le joueur courant
+            load_game(&current_player);  // Charge l'Ã©tat de la partie et le joueur courant
         } else if (choice == '1') {
-            reset_save();  // Réinitialise la sauvegarde pour une nouvelle partie
+            reset_save();  // RÃ©initialise la sauvegarde pour une nouvelle partie
         }
 
         do {
@@ -67,7 +67,7 @@ int main()
             system("cls");
             display();
 
-            // Vérifier si la partie est terminée
+            // VÃ©rifier si la partie est terminÃ©e
             if (check_game_over()) {
                 break;
             }
@@ -80,7 +80,7 @@ int main()
 
             printf(" \n\nPress Enter To Continue ! \n\n ");
             ch = getch();
-        } while (ch == 13); // 13 correspond à la touche Enter
+        } while (ch == 13); // 13 correspond Ã  la touche Enter
 
         // Fin de partie et retour au menu
         system("cls");
@@ -112,23 +112,23 @@ void display()
     printf("\n");
 }
 
-// Fonction pour changer la position des pièces
+// Fonction pour changer la position des piÃ¨ces
 void change(int r1, int c1, int r2, int c2)
 {
-    // La fonction change s'assure que la pièce se déplace
-    // et écrase la pièce adverse si elle est capturée
-    board[r2][c2] = board[r1][c1];  // Déplace la pièce
-    board[r1][c1] = ' ';  // Vide la case précédente
+    // La fonction change s'assure que la piÃ¨ce se dÃ©place
+    // et Ã©crase la piÃ¨ce adverse si elle est capturÃ©e
+    board[r2][c2] = board[r1][c1];  // DÃ©place la piÃ¨ce
+    board[r1][c1] = ' ';  // Vide la case prÃ©cÃ©dente
 }
 
-// Fonction pour vérifier si la pièce est celle de l'adversaire
+// Fonction pour vÃ©rifier si la piÃ¨ce est celle de l'adversaire
 int is_opponent_piece(char piece, int current_player)
 {
     if (current_player == 1) {
-        // Joueur 1 (majuscules) peut capturer les pièces en minuscules
+        // Joueur 1 (majuscules) peut capturer les piÃ¨ces en minuscules
         return piece >= 'a' && piece <= 'z';
     } else {
-        // Joueur 2 (minuscules) peut capturer les pièces en majuscules
+        // Joueur 2 (minuscules) peut capturer les piÃ¨ces en majuscules
         return piece >= 'A' && piece <= 'Z';
     }
 }
@@ -148,9 +148,9 @@ void rook(int r1, int c1, int current_player)
             printf("%d%d , ", r1, n-1);
         } else if (is_opponent_piece(board[r1][n-1], current_player)) {
             printf("%d%d (capture), ", r1, n-1);
-            break;  // Arrête après la capture
+            break;  // ArrÃªte aprÃ¨s la capture
         } else {
-            break;  // Impossible d'aller plus loin si c'est une pièce alliée
+            break;  // Impossible d'aller plus loin si c'est une piÃ¨ce alliÃ©e
         }
         n--;
     }
@@ -234,7 +234,7 @@ void queen(int r1, int c1, int current_player)
     printf("Available moves: \n");
 
     // Mouvement horizontal et vertical (comme la tour)
-    rook(r1, c1, current_player);  // On réutilise la logique de la tour
+    rook(r1, c1, current_player);  // On rÃ©utilise la logique de la tour
 
     // Mouvement diagonal (comme le fou)
     int x, y;
@@ -404,12 +404,12 @@ again2:
     *current_player = 1;  // Passe le tour au joueur 1
 }
 
-// Fonction pour vérifier si la partie est terminée
+// Fonction pour vÃ©rifier si la partie est terminÃ©e
 int check_game_over() {
     int pieces_player1 = 0;
     int pieces_player2 = 0;
 
-    // Compte les pièces des deux joueurs
+    // Compte les piÃ¨ces des deux joueurs
     for (int r = 0; r < 8; r++) {
         for (int c = 0; c < 8; c++) {
             if (board[r][c] >= 'A' && board[r][c] <= 'Z') {
@@ -431,13 +431,13 @@ int check_game_over() {
     return 0; // La partie continue
 }
 
-// Fonction pour gérer la fin de partie
+// Fonction pour gÃ©rer la fin de partie
 void end_game(int winner) {
     printf("\n--- Fin de la partie ---\n");
     if (winner == 1) {
-        printf("Le joueur 1 a gagné !\n");
+        printf("Le joueur 1 a gagnÃ© !\n");
     } else if (winner == 2) {
-        printf("Le joueur 2 a gagné !\n");
+        printf("Le joueur 2 a gagnÃ© !\n");
     }
 
     printf("\nAppuyez sur une touche pour revenir au menu principal...\n");
@@ -461,7 +461,7 @@ void load_game(int *player_turn)
 {
     FILE *file = fopen("save_game.txt", "r");  // Ouvre en mode lecture
     if (file == NULL) {
-        printf("Aucune partie sauvegardée trouvée.\n");
+        printf("Aucune partie sauvegardÃ©e trouvÃ©e.\n");
         return;
     }
 
@@ -473,12 +473,12 @@ void load_game(int *player_turn)
     fclose(file);
 }
 
-// Fonction pour réinitialiser la sauvegarde
+// Fonction pour rÃ©initialiser la sauvegarde
 void reset_save()
 {
-    FILE *file = fopen("save_game.txt", "w");  // Écrase le fichier existant
+    FILE *file = fopen("save_game.txt", "w");  // Ã‰crase le fichier existant
     if (file == NULL) {
-        printf("Erreur lors de la réinitialisation du fichier de sauvegarde.\n");
+        printf("Erreur lors de la rÃ©initialisation du fichier de sauvegarde.\n");
         return;
     }
     fclose(file);
